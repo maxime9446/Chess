@@ -1,5 +1,6 @@
 <?php
 
+// Création de la classe mere 
 class Pieces
 {
     public $position;
@@ -21,34 +22,45 @@ class Pieces
         $this->position = $position;
     }
 
-    public function show($position, $possiblePositions)
+    // Affichage de la grille contenant les mouvements possible ainsi que le nom de la pièces
+    public function show($position, $move)
     {
-        $this->grille = new Grille($position, $possiblePositions, $this->namePieces);
+        $this->grille = new Grille($position, $move, $this->namePieces);
 
     }
 }
 
 class Grille
 {
-    public function __construct($position, $possiblePositions, $name)
+    // création de la grille de jeu
+    public function __construct($position, $possibleMove, $name)
     {
+        // affichage de l'entête du jeu
         $alpha = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
         echo "  A  B  C  D  E  F  G  H" . PHP_EOL;
         $position = str_split($position);
         for ($i = 1; $i <= 8; $i++) {
+            // affichage des abscisses du jeu
             echo $i;
-            foreach ($alpha as $lettre) {
+            foreach ($alpha as $letter) {
+                // condition permettant d'afficher tout les déplacements possibles selon l'axe des abscisses
                 if ($position[1] == $i) {
-                    if ($position[0] === $lettre) {
+                    if ($position[0] === $letter) {
+                        // nom de la pièce
                         echo $name;
-                    } elseif ($possiblePositions[$lettre . $i] ?? null) {
+                    } elseif ($possibleMove[$letter . $i] ?? null) {
+                        // affichage des mouvements possibles
                         echo ' X ';
                     } else {
+                        // affichage de la grille
                         echo " - ";
                     }
-                } elseif ($possiblePositions[$lettre . $i] ?? null) {
+                // condition permettant d'afficher tout les déplacements possibles selon l'axe des ordonnées 
+                } elseif ($possibleMove[$letter . $i] ?? null) {
+                    // affichage des mouvements possibles
                     echo ' X ';
                 } else {
+                    // affichage de la grille
                     echo " - ";
                 }
             }
@@ -59,21 +71,24 @@ class Grille
 
 class Pion extends Pieces
 {
-    public function getPossiblePlay($position)
+    // fonction permettant d'afficher toutes les déplacements possibles
+    public function getPossibleLocation($position)
     {
-        $this->namePieces = " P ";
+        // affichage emoji d'un pion
+        $this->namePieces = " \u{265F}\u{FE0F} ";
+        // Convertion d'un string en array
         $position = str_split($position);
-        $x = $position[0];
-        $y = $position[1];
+        $width = $position[0];
+        $height = $position[1];
 
-        if ($y != 2) {
+        if ($height != 2) {
             return [
-                $x . ($y + 1) => $x . ($y + 1)
+                $width . ($height + 1) => $width . ($height + 1)
             ];
         } else {
             return [
-                $x . ($y + 1) => $x . ($y + 1),
-                $x . ($y + 2) => $x . ($y + 2)
+                $width . ($height + 1) => $width . ($height + 1),
+                $width . ($height + 2) => $width . ($height + 2)
             ];
         }
     }
@@ -81,12 +96,13 @@ class Pion extends Pieces
 
 class Cavalier extends Pieces
 {
-    public function getPossiblePlay($position)
+    public function getPossibleLocation($position)
     {
         $this->namePieces = " C ";
         $position = str_split($position);
-        $x = $position[0];
-        $y = $position[1];
+        $width = $position[0];
+        $height = $position[1];
+        // tableau en deux dimension permettant d'affecter des chiffres en lettres
         $alphabetToNumber = [
             1 => 'A',
             2 => 'B',
@@ -97,6 +113,7 @@ class Cavalier extends Pieces
             7 => 'G',
             8 => 'H',
         ];
+        // tableau en deux dimension permettant d'affecter des lettres en chiffres
         $numberToAlphabet = [
             'A' => 1,
             'B' => 2,
@@ -109,26 +126,26 @@ class Cavalier extends Pieces
         ];
 
         return [
-            $alphabetToNumber[($numberToAlphabet[$x] + 1)] . ($y + 2) => $alphabetToNumber[($numberToAlphabet[$x] + 1)] . ($y + 2),
-            $alphabetToNumber[($numberToAlphabet[$x] - 1)] . ($y + 2) => $alphabetToNumber[($numberToAlphabet[$x] - 1)] . ($y + 2),
-            $alphabetToNumber[($numberToAlphabet[$x] + 1)] . ($y - 2) => $alphabetToNumber[($numberToAlphabet[$x] + 1)] . ($y - 2),
-            $alphabetToNumber[($numberToAlphabet[$x] - 1)] . ($y - 2) => $alphabetToNumber[($numberToAlphabet[$x] - 1)] . ($y - 2),
-            $alphabetToNumber[($numberToAlphabet[$x] + 2)] . ($y + 1) => $alphabetToNumber[($numberToAlphabet[$x] + 2)] . ($y + 1),
-            $alphabetToNumber[($numberToAlphabet[$x] - 2)] . ($y - 1) => $alphabetToNumber[($numberToAlphabet[$x] - 2)] . ($y - 1),
-            $alphabetToNumber[($numberToAlphabet[$x] - 2)] . ($y + 1) => $alphabetToNumber[($numberToAlphabet[$x] - 2)] . ($y + 1),
-            $alphabetToNumber[($numberToAlphabet[$x] + 2)] . ($y - 1) => $alphabetToNumber[($numberToAlphabet[$x] + 2)] . ($y - 1),
+            $alphabetToNumber[($numberToAlphabet[$width] + 1)] . ($height + 2) => $alphabetToNumber[($numberToAlphabet[$width] + 1)] . ($height + 2),
+            $alphabetToNumber[($numberToAlphabet[$width] - 1)] . ($height + 2) => $alphabetToNumber[($numberToAlphabet[$width] - 1)] . ($height + 2),
+            $alphabetToNumber[($numberToAlphabet[$width] + 1)] . ($height - 2) => $alphabetToNumber[($numberToAlphabet[$width] + 1)] . ($height - 2),
+            $alphabetToNumber[($numberToAlphabet[$width] - 1)] . ($height - 2) => $alphabetToNumber[($numberToAlphabet[$width] - 1)] . ($height - 2),
+            $alphabetToNumber[($numberToAlphabet[$width] + 2)] . ($height + 1) => $alphabetToNumber[($numberToAlphabet[$width] + 2)] . ($height + 1),
+            $alphabetToNumber[($numberToAlphabet[$width] - 2)] . ($height - 1) => $alphabetToNumber[($numberToAlphabet[$width] - 2)] . ($height - 1),
+            $alphabetToNumber[($numberToAlphabet[$width] - 2)] . ($height + 1) => $alphabetToNumber[($numberToAlphabet[$width] - 2)] . ($height + 1),
+            $alphabetToNumber[($numberToAlphabet[$width] + 2)] . ($height - 1) => $alphabetToNumber[($numberToAlphabet[$width] + 2)] . ($height - 1),
         ];
     }
 }
 
 class Tour extends Pieces
 {
-    public function getPossiblePlay($position)
+    public function getPossibleLocation($position)
     {
         $this->namePieces = " T ";
         $position = str_split($position);
-        $x = $position[0];
-        $y = $position[1];
+        $width = $position[0];
+        $height = $position[1];
         $alphabetToNumber = [
             1 => 'A',
             2 => 'B',
@@ -153,13 +170,14 @@ class Tour extends Pieces
         $array = [];
 
         for ($i = 1; $i <= 8; $i++) {
-            $arrayPosition = [
-                $x . $i => $x . $i,
-                $alphabetToNumber[($numberToAlphabet[$x] + $i)] . $y => $alphabetToNumber[($numberToAlphabet[$x] + $i)] . $y,
-                $alphabetToNumber[($numberToAlphabet[$x] - $i)] . $y => $alphabetToNumber[($numberToAlphabet[$x] - $i)] . $y,
-            ];
-
-            $array = array_merge($array, $arrayPosition);
+            $posSup = $numberToAlphabet[$width] + $i;
+            $posInf = $numberToAlphabet[$width] - $i;
+                $arrayPosition = [
+                    $width . $i => $width . $i,
+                    $alphabetToNumber[$posSup] . $height => $alphabetToNumber[$posSup] . $height,
+                    $alphabetToNumber[$posInf] . $height => $alphabetToNumber[$posInf] . $height,
+                ];
+                $array = array_merge($array, $arrayPosition);
         }
 
         return $array;
@@ -168,12 +186,12 @@ class Tour extends Pieces
 
 class Fou extends Pieces
 {
-    public function getPossiblePlay($position)
+    public function getPossibleLocation($position)
     {
         $this->namePieces = " F ";
         $position = str_split($position);
-        $x = $position[0];
-        $y = $position[1];
+        $width = $position[0];
+        $height = $position[1];
         $alphabetToNumber = [
             1 => 'A',
             2 => 'B',
@@ -198,11 +216,13 @@ class Fou extends Pieces
         $array = [];
 
         for ($i = 1; $i <= 8; $i++) {
+            $posSup = $numberToAlphabet[$width] + $i;
+            $posInf = $numberToAlphabet[$width] - $i;
             $arrayPosition = [
-                $alphabetToNumber[($numberToAlphabet[$x] + $i)] . ($y + $i) => $alphabetToNumber[($numberToAlphabet[$x] + $i)] . ($y + $i),
-                $alphabetToNumber[($numberToAlphabet[$x] - $i)] . ($y - $i) => $alphabetToNumber[($numberToAlphabet[$x] - $i)] . ($y - $i),
-                $alphabetToNumber[($numberToAlphabet[$x] + $i)] . ($y - $i) => $alphabetToNumber[($numberToAlphabet[$x] + $i)] . ($y - $i),
-                $alphabetToNumber[($numberToAlphabet[$x] - $i)] . ($y + $i) => $alphabetToNumber[($numberToAlphabet[$x] - $i)] . ($y + $i),
+                $alphabetToNumber[$posSup] . ($height + $i) => $alphabetToNumber[$posSup] . ($height + $i),
+                $alphabetToNumber[$posInf] . ($height - $i) => $alphabetToNumber[$posInf] . ($height - $i),
+                $alphabetToNumber[$posSup] . ($height - $i) => $alphabetToNumber[$posSup] . ($height - $i),
+                $alphabetToNumber[$posInf] . ($height + $i) => $alphabetToNumber[$posInf] . ($height + $i),
             ];
 
             $array = array_merge($array, $arrayPosition);
@@ -214,12 +234,12 @@ class Fou extends Pieces
 
 class Reine extends Pieces
 {
-    public function getPossiblePlay($position)
+    public function getPossibleLocation($position)
     {
         $this->namePieces = " ^ ";
         $position = str_split($position);
-        $x = $position[0];
-        $y = $position[1];
+        $width = $position[0];
+        $height = $position[1];
         $alphabetToNumber = [
             1 => 'A',
             2 => 'B',
@@ -244,14 +264,16 @@ class Reine extends Pieces
         $array = [];
 
         for ($i = 1; $i <= 8; $i++) {
+            $posSup = $numberToAlphabet[$width] + $i;
+            $posInf = $numberToAlphabet[$width] - $i;
             $arrayPosition = [
-                $alphabetToNumber[($numberToAlphabet[$x] + $i)] . ($y + $i) => $alphabetToNumber[($numberToAlphabet[$x] + $i)] . ($y + $i),
-                $alphabetToNumber[($numberToAlphabet[$x] - $i)] . ($y - $i) => $alphabetToNumber[($numberToAlphabet[$x] - $i)] . ($y - $i),
-                $alphabetToNumber[($numberToAlphabet[$x] + $i)] . ($y - $i) => $alphabetToNumber[($numberToAlphabet[$x] + $i)] . ($y - $i),
-                $alphabetToNumber[($numberToAlphabet[$x] - $i)] . ($y + $i) => $alphabetToNumber[($numberToAlphabet[$x] - $i)] . ($y + $i),
-                $x . $i => $x . $i,
-                $alphabetToNumber[($numberToAlphabet[$x] + $i)] . $y => $alphabetToNumber[($numberToAlphabet[$x] + $i)] . $y,
-                $alphabetToNumber[($numberToAlphabet[$x] - $i)] . $y => $alphabetToNumber[($numberToAlphabet[$x] - $i)] . $y,
+                $alphabetToNumber[$posSup] . ($height + $i) => $alphabetToNumber[$posSup] . ($height + $i),
+                $alphabetToNumber[$posInf] . ($height - $i) => $alphabetToNumber[$posInf] . ($height - $i),
+                $alphabetToNumber[$posSup] . ($height - $i) => $alphabetToNumber[$posSup] . ($height - $i),
+                $alphabetToNumber[$posInf] . ($height + $i) => $alphabetToNumber[$posInf] . ($height + $i),
+                $width . $i => $width . $i,
+                $alphabetToNumber[$posSup] . $height => $alphabetToNumber[$posSup] . $height,
+                $alphabetToNumber[$posInf] . $height => $alphabetToNumber[$posInf] . $height,
             ];
 
             $array = array_merge($array, $arrayPosition);
@@ -263,12 +285,12 @@ class Reine extends Pieces
 
 class Roi extends Pieces
 {
-    public function getPossiblePlay($position)
+    public function getPossibleLocation($position)
     {
         $this->namePieces = " R ";
         $position = str_split($position);
-        $x = $position[0];
-        $y = $position[1];
+        $width = $position[0];
+        $height = $position[1];
         $alphabetToNumber = [
             1 => 'A',
             2 => 'B',
@@ -291,20 +313,48 @@ class Roi extends Pieces
         ];
 
         return [
-            $alphabetToNumber[($numberToAlphabet[$x] + 1)] . ($y + 1) => $alphabetToNumber[($numberToAlphabet[$x] + 1)] . ($y + 1),
-            $alphabetToNumber[($numberToAlphabet[$x] - 1)] . ($y - 1) => $alphabetToNumber[($numberToAlphabet[$x] - 1)] . ($y - 1),
-            $alphabetToNumber[($numberToAlphabet[$x] + 1)] . ($y - 1) => $alphabetToNumber[($numberToAlphabet[$x] + 1)] . ($y - 1),
-            $alphabetToNumber[($numberToAlphabet[$x] - 1)] . ($y + 1) => $alphabetToNumber[($numberToAlphabet[$x] - 1)] . ($y + 1),
-            $alphabetToNumber[($numberToAlphabet[$x] + 1)] . $y => $alphabetToNumber[($numberToAlphabet[$x] + 1)] . $y,
-            $alphabetToNumber[($numberToAlphabet[$x] - 1)] . $y => $alphabetToNumber[($numberToAlphabet[$x] - 1)] . $y,
-            $alphabetToNumber[$numberToAlphabet[$x]] . ($y + 1) => $alphabetToNumber[($numberToAlphabet[$x] + 1)] . ($y + 1),
-            $alphabetToNumber[$numberToAlphabet[$x]] . ($y - 1) => $alphabetToNumber[($numberToAlphabet[$x] - 1)] . ($y - 1),
+            $alphabetToNumber[($numberToAlphabet[$width] + 1)] . ($height + 1) => $alphabetToNumber[($numberToAlphabet[$width] + 1)] . ($height + 1),
+            $alphabetToNumber[($numberToAlphabet[$width] - 1)] . ($height - 1) => $alphabetToNumber[($numberToAlphabet[$width] - 1)] . ($height - 1),
+            $alphabetToNumber[($numberToAlphabet[$width] + 1)] . ($height - 1) => $alphabetToNumber[($numberToAlphabet[$width] + 1)] . ($height - 1),
+            $alphabetToNumber[($numberToAlphabet[$width] - 1)] . ($height + 1) => $alphabetToNumber[($numberToAlphabet[$width] - 1)] . ($height + 1),
+            $alphabetToNumber[($numberToAlphabet[$width] + 1)] . $height => $alphabetToNumber[($numberToAlphabet[$width] + 1)] . $height,
+            $alphabetToNumber[($numberToAlphabet[$width] - 1)] . $height => $alphabetToNumber[($numberToAlphabet[$width] - 1)] . $height,
+            $alphabetToNumber[$numberToAlphabet[$width]] . ($height + 1) => $alphabetToNumber[($numberToAlphabet[$width] + 1)] . ($height + 1),
+            $alphabetToNumber[$numberToAlphabet[$width]] . ($height - 1) => $alphabetToNumber[($numberToAlphabet[$width] - 1)] . ($height - 1),
         ];
     }
 }
 
+// Creation d'une pièce
+$piece = new Pion('D5');
+// permettant de séparer la lettre et le chiffre ('D' , 5)
+$position = $piece->position;
+// permettant de montrer les déplacements possibles de la pièce
+$move = $piece->getPossibleLocation($position);
+// affichage des mouvements possibles de la pièce
+$piece->show($position, $move);
+
+$piece = new Tour('D5');
+$position = $piece->position;
+$move = $piece->getPossibleLocation($position);
+$piece->show($position, $move);
+
+$piece = new Cavalier('D5');
+$position = $piece->position;
+$move = $piece->getPossibleLocation($position);
+$piece->show($position, $move);
+
+$piece = new Fou('D5');
+$position = $piece->position;
+$move = $piece->getPossibleLocation($position);
+$piece->show($position, $move);
 
 $piece = new Reine('D5');
 $position = $piece->position;
-$xy = $piece->getPossiblePlay($position);
-$piece->show($position, $xy);
+$move = $piece->getPossibleLocation($position);
+$piece->show($position, $move);
+
+$piece = new Roi('D5');
+$position = $piece->position;
+$move = $piece->getPossibleLocation($position);
+$piece->show($position, $move);
