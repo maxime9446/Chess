@@ -81,6 +81,7 @@ class Pion extends Pieces
         $width = $position[0];
         $height = $position[1];
 
+        // condition permettant de savoir ou est le pion et savoir combien de déplacements peut il faire 
         if ($height != 2) {
             return [
                 $width . ($height + 1) => $width . ($height + 1)
