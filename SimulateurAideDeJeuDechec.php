@@ -1,5 +1,6 @@
 <?php
 
+
 // Création de la classe mere 
 class Pieces
 {
@@ -168,7 +169,7 @@ class Tour extends Pieces
             'H' => 8,
         ];
 
-        $array = [];
+        $array = array();
 
         for ($i = 1; $i <= 8; $i++) {
             $posSup = $numberToAlphabet[$width] + $i;
@@ -214,7 +215,7 @@ class Fou extends Pieces
             'H' => 8,
         ];
 
-        $array = [];
+        $array = array();
 
         for ($i = 1; $i <= 8; $i++) {
             $posSup = $numberToAlphabet[$width] + $i;
@@ -262,7 +263,7 @@ class Reine extends Pieces
             'H' => 8,
         ];
 
-        $array = [];
+        $array = array();
 
         for ($i = 1; $i <= 8; $i++) {
             $posSup = $numberToAlphabet[$width] + $i;
@@ -337,7 +338,7 @@ $piece->show($position, $move);
 
 $piece = new Tour('D5');
 $position = $piece->position;
-$move = $piece->getPossibleLocation($position);
+$move = @$piece->getPossibleLocation($position);
 $piece->show($position, $move);
 
 $piece = new Cavalier('D5');
@@ -345,14 +346,14 @@ $position = $piece->position;
 $move = $piece->getPossibleLocation($position);
 $piece->show($position, $move);
 
-$piece = new Fou('D5');
+$piece = new Fou('G5');
 $position = $piece->position;
-$move = $piece->getPossibleLocation($position);
+$move = @$piece->getPossibleLocation($position);
 $piece->show($position, $move);
 
 $piece = new Reine('D5');
 $position = $piece->position;
-$move = $piece->getPossibleLocation($position);
+$move = @$piece->getPossibleLocation($position);
 $piece->show($position, $move);
 
 $piece = new Roi('D5');
