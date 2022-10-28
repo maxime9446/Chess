@@ -328,7 +328,7 @@ class Roi extends Pieces
 }
 
 // Creation d'une pièce
-$piece = new Pion('D5');
+$piece = new Pion('A5');
 // permettant de séparer la lettre et le chiffre ('D' , 5)
 $position = $piece->position;
 // permettant de montrer les déplacements possibles de la pièce
@@ -336,27 +336,27 @@ $move = $piece->getPossibleLocation($position);
 // affichage des mouvements possibles de la pièce
 $piece->show($position, $move);
 
-$piece = new Tour('D5');
+$piece = new Tour('B2');
 $position = $piece->position;
 $move = @$piece->getPossibleLocation($position);
 $piece->show($position, $move);
 
-$piece = new Cavalier('D5');
+$piece = new Cavalier('F1');
 $position = $piece->position;
 $move = $piece->getPossibleLocation($position);
 $piece->show($position, $move);
 
-$piece = new Fou('G5');
+$piece = new Fou('G4');
 $position = $piece->position;
 $move = @$piece->getPossibleLocation($position);
 $piece->show($position, $move);
 
-$piece = new Reine('D5');
+$piece = new Reine('B8');
 $position = $piece->position;
 $move = @$piece->getPossibleLocation($position);
 $piece->show($position, $move);
 
-$piece = new Roi('D5');
+$piece = new Roi('C7');
 $position = $piece->position;
 $move = $piece->getPossibleLocation($position);
 $piece->show($position, $move);
