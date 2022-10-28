@@ -100,7 +100,7 @@ class Cavalier extends Pieces
 {
     public function getPossibleLocation($position)
     {
-        $this->namePieces = " C ";
+        $this->namePieces = " \u{1F3A0}	";
         $position = str_split($position);
         $width = $position[0];
         $height = $position[1];
@@ -144,7 +144,7 @@ class Tour extends Pieces
 {
     public function getPossibleLocation($position)
     {
-        $this->namePieces = " T ";
+        $this->namePieces = " \u{1F5FC} ";
         $position = str_split($position);
         $width = $position[0];
         $height = $position[1];
@@ -190,7 +190,7 @@ class Fou extends Pieces
 {
     public function getPossibleLocation($position)
     {
-        $this->namePieces = " F ";
+        $this->namePieces = " \u{1F0CF} ";
         $position = str_split($position);
         $width = $position[0];
         $height = $position[1];
@@ -238,7 +238,7 @@ class Reine extends Pieces
 {
     public function getPossibleLocation($position)
     {
-        $this->namePieces = " ^ ";
+        $this->namePieces = " \u{1F478} ";
         $position = str_split($position);
         $width = $position[0];
         $height = $position[1];
@@ -289,7 +289,7 @@ class Roi extends Pieces
 {
     public function getPossibleLocation($position)
     {
-        $this->namePieces = " R ";
+        $this->namePieces = " \u{1F934} ";
         $position = str_split($position);
         $width = $position[0];
         $height = $position[1];
