@@ -341,7 +341,7 @@ $position = $piece->position;
 $move = @$piece->getPossibleLocation($position);
 $piece->show($position, $move);
 
-$piece = new Cavalier('F1');
+$piece = new Cavalier('E5');
 $position = $piece->position;
 $move = $piece->getPossibleLocation($position);
 $piece->show($position, $move);
