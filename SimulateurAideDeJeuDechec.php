@@ -100,7 +100,7 @@ class Cavalier extends Pieces
 {
     public function getPossibleLocation($position)
     {
-        $this->namePieces = " \u{1F3A0}	";
+        $this->namePieces = " \u{1F3A0}";
         $position = str_split($position);
         $width = $position[0];
         $height = $position[1];
