@@ -8,9 +8,10 @@ spl_autoload_register(function($className){
 
     require_once $className;
 });
+
 // Creation d'une pièce
 $piece = new App\Pion('A5');
-// permettant de séparer la lettre et le chiffre ('D' , 5)
+// permettant de savoir où est la pièce
 $position = $piece->position;
 // permettant de montrer les déplacements possibles de la pièce
 $move = $piece->getPossibleLocation($position);
