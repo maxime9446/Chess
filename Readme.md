@@ -4,7 +4,7 @@
 
 ## Utilisation de la méthode SOLID
 
-## Lors de ce projet, j'ai utilisé les 5 principes du SOLID :
+## Lors de ce projet, j'ai utilisé les 5 principes du SOLID :
 ### Single Responsability Principle
 * S: j'ai séparé toutes mes classes en plusieurs ceux qui me permettent d'avoir un code plus clair, plus simple à maintenir.
 ### Open/Closed Principle
@@ -28,8 +28,8 @@ permet d'eviter les bogues et de lire plus facilement le code.
    2. Si vous choisissez **HTTPS**, vous devrez entrer à chaque manipulation du GIT votre login et votre mot de passe.
 4. Ouvrez un terminal dans lequel vous voulez que le code Echec se trouve
 5. Ecrivez **git clone** avec l'url que vous avez récupéré à la place.
-   1. `git clone` `git@github.com:maxime9446/Chess.git`
-   2. `git clone` `https://github.com/maxime9446/Chess.git`
+   1. `git clone git@github.com:maxime9446/Chess.git`
+   2. `git clone https://github.com/maxime9446/Chess.git`
 6. Puis `cd Echec/`
 7. Taper dans votre terminal `php index.php`
 
