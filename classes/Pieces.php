@@ -2,10 +2,10 @@
 
 namespace App;
 
+use Exception;
+
 // mon code respecte le principe de substitution de Liskov 
-interface PiecesInterface {
-    public function getPossibleLocation() : array;
-}
+
 // Création de la classe mere 
 class Pieces
 {
@@ -31,8 +31,16 @@ class Pieces
     // Affichage de la grille contenant les mouvements possible ainsi que le nom de la pièces
     public function show($position, $move)
     {
-        $this->grille = new Grille($position, $move, $this->namePieces);
-
+        try{
+            if((int)substr($position, -1) > 0 && (int)substr($position, -1) < 9){
+                $this->grille = new Grille($position, $move, $this->namePieces);
+            }else{
+                throw new Exception('Position non valide.');
+            }
+        }catch(Exception $e){
+            echo "Veuillez mettre une position valide. \n";
+        }
+        
     }
 }
 

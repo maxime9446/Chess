@@ -7,6 +7,7 @@ class Grille
     // création de la grille de jeu
     public function __construct($position, $possibleMove, $name)
     {
+        echo "\n \nSimulateur de déplacement jeu d'echec pour : " . $name ."\n\n" ;
         // affichage de l'entête du jeu
         $alpha = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
         echo "  A  B  C  D  E  F  G  H" . PHP_EOL;

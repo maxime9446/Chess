@@ -1,4 +1,5 @@
 <?php
+
 namespace autoload;
 
 spl_autoload_register(function($className){

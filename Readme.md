@@ -15,7 +15,7 @@ permet d'eviter les bogues et de lire plus facilement le code.
 ### Interface Segregation Principle
 * I : je respecte ce principe car une interface avec une fonction a été crée pour tous les enfants ceux qui me permet de lire plus facilement le code.
 ### Dependency Inversion Principle
-* D : J'ai créé une interface 'PieceInterface' qui contient la fonction 'getPossibleLocation' qui certifie au programme qu'il va retrouver la méthode getPossibleLocation() dans chacune des classes.
+* D : J'ai créé une interface 'PositionInterface' qui contient la fonction 'getPossibleLocation' qui certifie au programme qu'il va retrouver la méthode getPossibleLocation() dans chacune des classes.
 
 ## Fonctionnement
 
