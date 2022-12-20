@@ -1,13 +1,6 @@
 <?php
 
-spl_autoload_register(function($className){
-    
-    $className = str_replace("App", "classes", $className);
-    $className = str_replace("\\", "/", $className);
-    $className .= '.php';
-
-    require_once $className;
-});
+require_once 'autoloader.php';
 
 // Creation d'une pièce
 $piece = new App\Pion('A5');
@@ -25,7 +18,7 @@ $piece->show($position, $move);
 
 $piece = new App\Cavalier('E5');
 $position = $piece->position;
-$move = $piece->getPossibleLocation($position);
+$move = @$piece->getPossibleLocation($position);
 $piece->show($position, $move);
 
 $piece = new App\Fou('G4');

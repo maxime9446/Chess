@@ -2,10 +2,6 @@
 
 namespace App; 
 
-require_once 'Pieces.php';
-
-
-
 class Cavalier extends Pieces implements PositionInterface
 {
     // fonction permettant d'afficher toutes les déplacements possibles

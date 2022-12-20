@@ -2,9 +2,10 @@
 
 namespace App;
 
-require_once 'Grille.php';
 // mon code respecte le principe de substitution de Liskov 
-
+interface PiecesInterface {
+    public function getPossibleLocation() : array;
+}
 // Création de la classe mere 
 class Pieces
 {

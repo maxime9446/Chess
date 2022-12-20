@@ -2,7 +2,6 @@
 
 namespace App;
 
-require_once 'Pieces.php';
 
 class Tour extends Pieces implements PositionInterface
 {

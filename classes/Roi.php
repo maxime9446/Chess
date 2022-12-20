@@ -2,8 +2,6 @@
 
 namespace App;
 
-require_once 'Pieces.php';
-
 class Roi extends Pieces implements PositionInterface
 {
     // fonction permettant d'afficher toutes les déplacements possibles
